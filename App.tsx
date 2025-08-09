@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { HomePage } from './pages/HomePage';
 import { PaymentPage } from './pages/PaymentPage';
+import { ResidentBillingPage } from './pages/ResidentBillingPage';
 import type { PaymentData } from './types';
 
 // Make qrcode available from the global scope (window)
@@ -91,7 +92,7 @@ const generateDynamicQris = (
 
 
 const App: React.FC = () => {
-  const [route, setRoute] = useState<'home' | 'payment'>('home');
+  const [route, setRoute] = useState<'home' | 'payment' | 'billing'>('home');
   const [paymentData, setPaymentData] = useState<PaymentData | null>(null);
 
   const handleGenerate = (
@@ -111,12 +112,20 @@ const App: React.FC = () => {
     setRoute('home');
   };
 
+  const handleGoToBilling = () => {
+    setRoute('billing');
+  };
+
+  const handleBackFromBilling = () => {
+    setRoute('home');
+  };
   return (
     <div className="min-h-screen font-sans bg-zinc-50 sm:flex sm:items-center sm:justify-center sm:p-4">
       <div className="w-full h-screen bg-white sm:h-auto sm:max-w-sm sm:rounded-3xl sm:shadow-lg sm:overflow-hidden flex flex-col">
         <main className="flex-grow overflow-y-auto">
-            {route === 'home' && <HomePage onGenerate={handleGenerate} parseMerchantName={parseMerchantName} />}
+            {route === 'home' && <HomePage onGenerate={handleGenerate} parseMerchantName={parseMerchantName} onGoToBilling={handleGoToBilling} />}
             {route === 'payment' && paymentData && <PaymentPage paymentData={paymentData} onBack={handleBackToHome} />}
+            {route === 'billing' && <ResidentBillingPage onBack={handleBackFromBilling} />}
         </main>
         <footer className="text-center text-xs text-zinc-400 py-3 border-t border-zinc-100 flex-shrink-0">
           Code by Ogya Adyatma Putra & cetass cetass

@@ -15,9 +15,10 @@ interface HomePageProps {
     feeValue: string
   ) => void;
   parseMerchantName: (qrisData: string) => string;
+  onGoToBilling: () => void;
 }
 
-export const HomePage: React.FC<HomePageProps> = ({ onGenerate, parseMerchantName }) => {
+export const HomePage: React.FC<HomePageProps> = ({ onGenerate, parseMerchantName, onGoToBilling }) => {
   const [formData, setFormData] = useState<DynamicQrisFormData>({
     paymentAmount: '',
     transactionFeeType: 'Persentase',
@@ -209,9 +210,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onGenerate, parseMerchantNam
           </FormField>
           
           <div className="pt-4">
-             <button type="submit" className="w-full bg-blue-600 text-white font-bold py-4 px-4 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300">
-               Generate & Pay
-             </button>
+            <div className="space-y-3">
+              <button type="submit" className="w-full bg-blue-600 text-white font-bold py-4 px-4 rounded-xl hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-300">
+                Generate & Pay
+              </button>
+              
+              <button 
+                type="button"
+                onClick={onGoToBilling}
+                className="w-full bg-green-600 text-white font-bold py-4 px-4 rounded-xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors duration-300"
+              >
+                <i className="fa-solid fa-users mr-2"></i>
+                Tagihan Warga
+              </button>
+            </div>
           </div>
         </form>
     </>
