@@ -128,7 +128,7 @@ const App: React.FC = () => {
             {route === 'billing' && <ResidentBillingPage onBack={handleBackFromBilling} />}
         </main>
         <footer className="text-center text-xs text-zinc-400 py-3 border-t border-zinc-100 flex-shrink-0">
-          Code by Ogya Adyatma Putra & cetass cetass
+          Code by Irfan
         </footer>
       </div>
     </div>
